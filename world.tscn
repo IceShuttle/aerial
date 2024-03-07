@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4fqnhbr2nqr2"]
+
+[ext_resource type="PackedScene" uid="uid://ocb74erv77jr" path="res://drone.tscn" id="1_spcih"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t0gxj"]
+
+[sub_resource type="Sky" id="Sky_ggpyq"]
+sky_material = SubResource("ProceduralSkyMaterial_t0gxj")
+
+[sub_resource type="Environment" id="Environment_7xk5m"]
+background_mode = 2
+sky = SubResource("Sky_ggpyq")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1259, -0.29541, -2.00211)
+use_collision = true
+size = Vector3(11.9707, 0.40918, 18.4771)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.992278, 0.124034, 0, -0.124034, 0.992278, -9.53674e-07, 9.37324, 10.8471)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7xk5m")
+
+[node name="Drone" parent="." instance=ExtResource("1_spcih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900814, 0.532022, -0.149008)

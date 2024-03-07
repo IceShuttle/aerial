@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ocb74erv77jr"]
+
+[ext_resource type="Script" path="res://drone.gd" id="1_4inxx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u4tas"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mit5j"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7sysl"]
+material = SubResource("StandardMaterial3D_mit5j")
+size = Vector3(2, 0.5, 2)
+
+[node name="Drone" type="RigidBody3D"]
+script = ExtResource("1_4inxx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_u4tas")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7sysl")
