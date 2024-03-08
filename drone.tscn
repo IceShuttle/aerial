@@ -1,22 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://ocb74erv77jr"]
+[gd_scene load_steps=6 format=3 uid="uid://ocb74erv77jr"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_4inxx"]
+[ext_resource type="PackedScene" uid="uid://bxji7jh72g2l0" path="res://drone/scene.gltf" id="2_njs0s"]
+[ext_resource type="Script" path="res://fan.gd" id="3_x4md5"]
+[ext_resource type="AudioStream" uid="uid://cy3i24i8pnra1" path="res://mini-quadcopter-flying-loop-80330.mp3" id="4_s1ugn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u4tas"]
 size = Vector3(2, 0.5, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mit5j"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7sysl"]
-material = SubResource("StandardMaterial3D_mit5j")
-size = Vector3(2, 0.5, 2)
-
 [node name="Drone" type="RigidBody3D"]
 script = ExtResource("1_4inxx")
+altitude = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_u4tas")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_7sysl")
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_njs0s")]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -0.316792, 0.187352, 0)
+
+[node name="polySurface36" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="9" node_paths=PackedStringArray("Drone")]
+script = ExtResource("3_x4md5")
+Drone = NodePath("../../../../../..")
+
+[node name="polySurface37" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="10"]
+transform = Transform3D(-0.0750325, -1.22119e-16, -0.997181, 0, 1, -1.22465e-16, -0.997181, 9.18883e-18, 0.0750325, 16.5627, -17.8611, -42.8476)
+
+[node name="polySurface40" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="28" node_paths=PackedStringArray("Drone")]
+script = ExtResource("3_x4md5")
+Drone = NodePath("../../../../../..")
+
+[node name="polySurface40_ai_whitePlastic_0" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone/polySurface40" index="0"]
+transform = Transform3D(1, 0, -2.98023e-08, 6.61744e-24, 1, 0, 2.98023e-08, -2.64698e-23, 1, 0, 0, 0)
+
+[node name="polySurface45" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="52" node_paths=PackedStringArray("Drone")]
+script = ExtResource("3_x4md5")
+Drone = NodePath("../../../../../..")
+
+[node name="polySurface46" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="53" node_paths=PackedStringArray("Drone")]
+script = ExtResource("3_x4md5")
+Drone = NodePath("../../../../../..")
+
+[node name="polySurface47" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="55" node_paths=PackedStringArray("Drone")]
+script = ExtResource("3_x4md5")
+Drone = NodePath("../../../../../..")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279602, 0)
+stream = ExtResource("4_s1ugn")
+autoplay = true
+
+[editable path="Sketchfab_Scene"]

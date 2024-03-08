@@ -10,6 +10,7 @@ sky_material = SubResource("ProceduralSkyMaterial_t0gxj")
 [sub_resource type="Environment" id="Environment_7xk5m"]
 background_mode = 2
 sky = SubResource("Sky_ggpyq")
+tonemap_mode = 3
 
 [node name="Node3D" type="Node3D"]
 
@@ -26,3 +27,7 @@ environment = SubResource("Environment_7xk5m")
 
 [node name="Drone" parent="." instance=ExtResource("1_spcih")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900814, 0.532022, -0.149008)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.866025, 0.5, 0, -0.5, -0.866025, 0, 4, 4)
+shadow_enabled = true
