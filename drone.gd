@@ -1,13 +1,14 @@
 extends RigidBody3D
 
-const P_GAIN = 1
-const I_GAIN = 0.001
-const D_GAIN = 10
+var P_GAIN = 12
+var I_GAIN = .001
+var D_GAIN = 40
 
-@export var altitude = 20
-var power_factor = 200
+@export var altitude:float = 10
+var power_factor = 20
 var max_power = 12
-var total_err = 0
+var min_power = 9
+var integrated_err = 0
 var last_err = 0
 var force = 0
 
@@ -23,10 +24,10 @@ func _process(_delta):
 	
 func _physics_process(delta):
 	var err = altitude-global_position.y
-	total_err+=err
-	var derivative = err-last_err
-	force = (err*P_GAIN+total_err*I_GAIN+derivative*D_GAIN)*delta*power_factor
-	force = clamp(force,0,max_power)*Vector3.UP
+	integrated_err+=err*delta
+	var derivative = (err-last_err)/delta
+	force = (err*P_GAIN+integrated_err*I_GAIN+derivative*D_GAIN)*power_factor
+	force = clamp(force,min_power,max_power)*Vector3.UP
 	apply_central_force(force)
 	last_err = err
 
