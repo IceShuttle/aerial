@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce5oeelpqyvug"]
 
 [ext_resource type="PackedScene" uid="uid://bxji7jh72g2l0" path="res://drone/scene.gltf" id="1_1xap5"]
-[ext_resource type="Script" path="res://fan.gd" id="2_1io6d"]
+[ext_resource type="Script" uid="uid://wstihmfghl85" path="res://fan.gd" id="2_1io6d"]
 
 [node name="Sketchfab_Scene" instance=ExtResource("1_1xap5")]
 

@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4fqnhbr2nqr2"]
+[gd_scene load_steps=6 format=3 uid="uid://b4fqnhbr2nqr2"]
 
 [ext_resource type="PackedScene" uid="uid://ocb74erv77jr" path="res://drone.tscn" id="1_spcih"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i06ws"]
+albedo_color = Color(0.9, 0.2562, 0.234, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t0gxj"]
 
@@ -19,18 +22,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1259, -0.29541, -2.00211)
 use_collision = true
 size = Vector3(11.9707, 0.40918, 18.4771)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99991, 0.0134386, 0, -0.0134386, 0.99991, 4.56652, 0.229854, -7.8473)
+size = Vector3(2.6012, 1.44574, 2.58826)
+material = SubResource("StandardMaterial3D_i06ws")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.992278, 0.124034, 0, -0.124034, 0.992278, -9.53674e-07, 9.37324, 10.8471)
 current = true
 
 [node name="Drone" parent="." instance=ExtResource("1_spcih")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900814, 0.532022, -0.149008)
+altitude = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="Drone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0763236, -0.00703716)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.866025, 0.5, 0, -0.5, -0.866025, 0, 4, 4)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.61239, 4)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
