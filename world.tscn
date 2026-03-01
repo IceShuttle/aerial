@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4fqnhbr2nqr2"]
+[gd_scene format=3 uid="uid://b4fqnhbr2nqr2"]
 
 [ext_resource type="PackedScene" uid="uid://ocb74erv77jr" path="res://drone.tscn" id="1_spcih"]
+[ext_resource type="Script" uid="uid://dgcnc83djtp5m" path="res://addons/goutte.camera.trackball/trackball_camera.gd" id="2_632g5"]
+[ext_resource type="PackedScene" uid="uid://chvhqrexxilki" path="res://worlds/island/island_castle.tscn" id="2_fj7yv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i06ws"]
 albedo_color = Color(0.9, 0.2562, 0.234, 1)
@@ -15,32 +17,50 @@ background_mode = 2
 sky = SubResource("Sky_ggpyq")
 tonemap_mode = 3
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1684821677]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1259, -0.29541, -2.00211)
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=162568873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -184.277, 7.11671, 78.5404)
+visible = false
 use_collision = true
 size = Vector3(11.9707, 0.40918, 18.4771)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" unique_id=733584928]
 transform = Transform3D(1, 0, 0, 0, 0.99991, 0.0134386, 0, -0.0134386, 0.99991, 4.56652, 0.229854, -7.8473)
+visible = false
 size = Vector3(2.6012, 1.44574, 2.58826)
 material = SubResource("StandardMaterial3D_i06ws")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=58356364]
 transform = Transform3D(1, 0, 0, 0, 0.992278, 0.124034, 0, -0.124034, 0.992278, -9.53674e-07, 9.37324, 10.8471)
 current = true
 
-[node name="Drone" parent="." instance=ExtResource("1_spcih")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.900814, 0.532022, -0.149008)
-altitude = 3.0
+[node name="Drone" parent="." unique_id=1855131292 instance=ExtResource("1_spcih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -184.502, 7.94415, 80.3935)
+mass = 0.389
+gravity_scale = 5.0
 
-[node name="Camera3D" type="Camera3D" parent="Drone"]
+[node name="Camera3D" type="Camera3D" parent="Drone" unique_id=1193931101]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0763236, -0.00703716)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Drone" unique_id=362814901]
+remote_path = NodePath("../../Node3D")
+update_rotation = false
+update_scale = false
+
+[node name="TrackballCamera" type="Camera3D" parent="Drone" unique_id=320209784]
+current = true
+script = ExtResource("2_632g5")
+action_enabled = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1629897216]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.61239, 4)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1390598348]
 environment = SubResource("Environment_7xk5m")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1857395086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -184.502, 7.94415, 80.3935)
+
+[node name="Sketchfab_Scene" parent="." unique_id=1095940231 instance=ExtResource("2_fj7yv")]

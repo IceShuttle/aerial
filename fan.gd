@@ -9,4 +9,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	global_rotate(Vector3.UP,Drone.vertical_force.length())
+	global_rotate(Vector3.UP,10)
