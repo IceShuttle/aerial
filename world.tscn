@@ -49,6 +49,7 @@ update_rotation = false
 update_scale = false
 
 [node name="TrackballCamera" type="Camera3D" parent="Drone" unique_id=320209784]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 current = true
 script = ExtResource("2_632g5")
 action_enabled = false

@@ -5,7 +5,7 @@ var I_GAIN_THRUST = .001
 var D_GAIN_THRUST = 40
 var armed = true;
 
-@export var altitude:float = 10
+@export var altitude:float = global_transform.origin.y
 @onready var mesh = $Sketchfab_Scene
 var power_factor = 80
 var max_power = 62
@@ -53,16 +53,21 @@ func _control():
 	altitude+=up*.2;
 	var right = Input.get_action_raw_strength("rotate_right")-Input.get_action_strength("rotate_left");
 	apply_torque_impulse(-right*global_transform.basis.y*.02)
-	front_target_angle = (Input.get_action_strength("strafe_forward")-Input.get_action_strength("strafe_back"))*max_angle;
-	right_target_angle = (Input.get_action_strength("strafe_right")-Input.get_action_strength("strafe_left"))*max_angle;
+	front_target_angle += (Input.get_action_strength("strafe_forward")-Input.get_action_strength("strafe_back"))*max_angle;
+	right_target_angle += (Input.get_action_strength("strafe_right")-Input.get_action_strength("strafe_left"))*max_angle;
 
 func _listen():
 	altitude+=clamp(TcpListener.throttle,-1,1)*.2
 	apply_torque_impulse(clamp(TcpListener.yaw_rate,-1,1)*global_transform.basis.y*.02)
-	front_target_angle=clamp(TcpListener.pitch,-1,1)*max_angle
-	right_target_angle=clamp(TcpListener.yaw_rate,-1,1)*max_angle
+	front_target_angle+=clamp(TcpListener.pitch,-1,1)*max_angle
+	right_target_angle+=clamp(TcpListener.yaw_rate,-1,1)*max_angle
+	
+func reset_control():
+	front_target_angle=0
+	right_target_angle=0
 	
 func _physics_process(delta):
+	reset_control()
 	_control()
 	_listen()
 	_thrust(delta)

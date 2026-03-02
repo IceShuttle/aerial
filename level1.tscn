@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://cfbtowpljwgxu"]
+
+[ext_resource type="Material" uid="uid://8eq58jug6utl" path="res://textures/PavingStones136_1K-JPG.tres" id="1_ootpb"]
+[ext_resource type="PackedScene" uid="uid://ocb74erv77jr" path="res://drone.tscn" id="2_v38iq"]
+[ext_resource type="Script" uid="uid://dgcnc83djtp5m" path="res://addons/goutte.camera.trackball/trackball_camera.gd" id="3_v8kj3"]
+[ext_resource type="Texture2D" uid="uid://cl8herwui26a7" path="res://textures/aruco.jpg" id="4_v38iq"]
+[ext_resource type="Texture2D" uid="uid://v3arhqgiyq5a" path="res://textures/hdri/citrus_orchard_road_puresky_2k.hdr" id="5_v8kj3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lgp48"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jwv3a"]
+size = Vector3(50, 0.52138674, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dopym"]
+size = Vector2(200, 200)
+
+[sub_resource type="Curve3D" id="Curve3D_v8kj3"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 88.73666, 5.8174133e-05, -88.71457, 0, 0, 0, 0, 0, 0, -85.67863, 5.8174133e-05, -90.90257, 0, 0, 0, 0, 0, 0, -81.33254, 5.8174133e-05, 86.51305, 0, 0, 0, 0, 0, 0, 66.57865, -0.77929974, 87.033424, 0, 0, 0, 0, 0, 0, 4.7606306, -0.7792387, 73.38356, 0, 0, 0, 0, 0, 0, -31.011757, -0.7792387, 43.785084, 0, 0, 0, 0, 0, 0, -79.01368, -0.7792387, 4.0677605, 0, 0, 0, 0, 0, 0, 3.4849043, -0.7792387, -83.53381, 0, 0, 0, 0, 0, 0, 82.15623, -0.7792387, 6.1940136, 0, 0, 0, 0, 0, 0, -38.18964, -0.7792387, -56.743046),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v38iq"]
+size = Vector3(13, 1, 13)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crycw"]
+albedo_texture = ExtResource("4_v38iq")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i2041"]
+size = Vector2(2.5, 2.5)
+
+[sub_resource type="Animation" id="Animation_v38iq"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_v8kj3"]
+resource_name = "move"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -5.0324535, -0.16666669, 0, 0, 0, -4.967547, 0.16666667, 0, 0),
+"times": PackedFloat32Array(0, 30.19472, 60)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crycw"]
+_data = {
+&"RESET": SubResource("Animation_v38iq"),
+&"move": SubResource("Animation_v8kj3")
+}
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_crycw"]
+panorama = ExtResource("5_v8kj3")
+
+[sub_resource type="Sky" id="Sky_i2041"]
+sky_material = SubResource("PanoramaSkyMaterial_crycw")
+
+[sub_resource type="Environment" id="Environment_xy4tn"]
+background_mode = 2
+sky = SubResource("Sky_i2041")
+
+[node name="Node3D" type="Node3D" unique_id=422785320]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=223055451]
+physics_material_override = SubResource("PhysicsMaterial_lgp48")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=333720685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28728238, 0)
+shape = SubResource("BoxShape3D_jwv3a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1947758824]
+material_override = ExtResource("1_ootpb")
+mesh = SubResource("PlaneMesh_dopym")
+
+[node name="Drone" parent="." unique_id=158634808 instance=ExtResource("2_v38iq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8855212, 0)
+mass = 0.389
+gravity_scale = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Drone" unique_id=1636512225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0763236, -0.00703716)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Drone" unique_id=594171146]
+remote_path = NodePath("../..")
+update_rotation = false
+update_scale = false
+
+[node name="TrackballCamera" type="Camera3D" parent="Drone" unique_id=1451542765]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+current = true
+script = ExtResource("3_v8kj3")
+stabilize_horizon = true
+action_enabled = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1542175423]
+transform = Transform3D(0.6468031, 0.57090515, -0.50568074, 0, 0.66305137, 0.74857396, 0.76265717, -0.48417994, 0.42886367, 0, 37.04841, 43.27621)
+shadow_enabled = true
+
+[node name="Path3D" type="Path3D" parent="." unique_id=979684722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2200093, 3.5549161, 0)
+curve = SubResource("Curve3D_v8kj3")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1809122679]
+transform = Transform3D(0.012542654, 0, 0.999919, 0, 0.9999797, 0, -0.9998313, 0, 0.012543754, 88.73666, 5.8174133e-05, -88.71457)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Path3D/PathFollow3D" unique_id=1443207855]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/StaticBody3D" unique_id=852024319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26176906, 0)
+shape = SubResource("BoxShape3D_v38iq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D/StaticBody3D" unique_id=393557617]
+transform = Transform3D(5, 0, 0, 0, 4.9999995, 0, 0, 0, 5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_crycw")
+mesh = SubResource("PlaneMesh_i2041")
+skeleton = NodePath("../../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path3D" unique_id=1834046185]
+libraries/ = SubResource("AnimationLibrary_crycw")
+autoplay = &"move"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=175579176]
+environment = SubResource("Environment_xy4tn")
