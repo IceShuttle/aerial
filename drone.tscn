@@ -1,21 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://ocb74erv77jr"]
+[gd_scene format=3 uid="uid://ocb74erv77jr"]
 
 [ext_resource type="Script" uid="uid://cwmqaa3ju3mig" path="res://drone.gd" id="1_4inxx"]
 [ext_resource type="PackedScene" uid="uid://bxji7jh72g2l0" path="res://drone/scene.gltf" id="2_njs0s"]
 [ext_resource type="Script" uid="uid://wstihmfghl85" path="res://fan.gd" id="3_x4md5"]
 [ext_resource type="AudioStream" uid="uid://cy3i24i8pnra1" path="res://mini-quadcopter-flying-loop-80330.mp3" id="4_s1ugn"]
+[ext_resource type="Script" uid="uid://0222rj0dwmla" path="res://Scripts/RigidBodyPublisher.gd" id="5_ardpj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u4tas"]
 size = Vector3(2.14502, 0.87207, 2.39697)
 
-[node name="Drone" type="RigidBody3D"]
+[node name="Drone" type="RigidBody3D" unique_id=191569209]
 script = ExtResource("1_4inxx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1179125128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104736, 0.186035, -0.198486)
 shape = SubResource("BoxShape3D_u4tas")
 
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_njs0s")]
+[node name="Sketchfab_Scene" parent="." unique_id=1173058083 instance=ExtResource("2_njs0s")]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -0.316792, 0.187352, 0)
 
 [node name="polySurface36" parent="Sketchfab_Scene/Sketchfab_model/b688934f931d4976a8559b7232b633bd_fbx/RootNode/Drone" index="9" node_paths=PackedStringArray("Drone")]
@@ -44,9 +45,13 @@ Drone = NodePath("../../../../../..")
 script = ExtResource("3_x4md5")
 Drone = NodePath("../../../../../..")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=670656911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279602, 0)
 stream = ExtResource("4_s1ugn")
 autoplay = true
+
+[node name="RigidBodyTCPPublisher" type="Node" parent="." unique_id=369784635]
+script = ExtResource("5_ardpj")
+metadata/_custom_type_script = "uid://0222rj0dwmla"
 
 [editable path="Sketchfab_Scene"]

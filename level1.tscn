@@ -47,7 +47,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_v8kj3"]
 resource_name = "move"
-length = 60.0
+length = 120.0
 loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -56,9 +56,9 @@ tracks/0/path = NodePath("PathFollow3D:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2),
+"handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -5.0324535, -0.16666669, 0, 0, 0, -4.967547, 0.16666667, 0, 0),
-"times": PackedFloat32Array(0, 30.19472, 60)
+"times": PackedFloat32Array(0, 61.033333, 120.066666)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_crycw"]
@@ -119,7 +119,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2200093, 3.5549161, 0)
 curve = SubResource("Curve3D_v8kj3")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1809122679]
-transform = Transform3D(0.012542654, 0, 0.999919, 0, 0.9999797, 0, -0.9998313, 0, 0.012543754, 88.73666, 5.8174133e-05, -88.71457)
+transform = Transform3D(0.012542536, 0, 0.99991894, 0, 0.9999797, 0, -0.9998219, 0, 0.012543753, 88.73666, 5.8174133e-05, -88.71457)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Path3D/PathFollow3D" unique_id=1443207855]
 
@@ -139,3 +139,16 @@ autoplay = &"move"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=175579176]
 environment = SubResource("Environment_xy4tn")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=799525955]
+transform = Transform3D(0.012542653, 0, 0.999919, 0, 0.9999797, 0, -0.99983126, 0, 0.012543754, -6.3093796, 3.5549743, -38.82047)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=175602659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26176906, 0)
+shape = SubResource("BoxShape3D_v38iq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1912341943]
+transform = Transform3D(5, 0, 0, 0, 4.9999995, 0, 0, 0, 5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_crycw")
+mesh = SubResource("PlaneMesh_i2041")
+skeleton = NodePath("../..")
